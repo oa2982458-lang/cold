@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - Google Accounts</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #fff;
+            color: #202124;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            color: #5f6368;
+        }
+        
+        .logo span {
+            margin-left: 8px;
+        }
+        
+        .nav-links a {
+            color: #5f6368;
+            text-decoration: none;
+            margin-left: 16px;
+            font-size: 14px;
+        }
+        
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            padding: 20px;
+        }
+        
+        .login-card {
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 48px 40px 36px;
+            margin: 20px 0;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .login-header h1 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+        
+        .login-header p {
+            color: #5f6368;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 13px 15px;
+            font-size: 16px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            transition: border 0.2s;
+        }
+        
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border: 1px solid #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+        }
+        
+        .forgot-email {
+            color: #1a73e8;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 36px;
+        }
+        
+        .forgot-email:hover {
+            text-decoration: underline;
+        }
+        
+        .login-info {
+            color: #5f6368;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+        
+        .login-info a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .create-account {
+            color: #1a73e8;
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .create-account:hover {
+            text-decoration: underline;
+        }
+        
+        .next-btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .next-btn:hover {
+            background-color: #1669d6;
+        }
+        
+        .next-btn:active {
+            background-color: #1a5fb4;
+        }
+        
+        footer {
+            background-color: #f2f2f2;
+            padding: 20px;
+            color: #5f6368;
+            font-size: 14px;
+        }
+        
+        .footer-content {
+            max-width: 980px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #5f6368;
+            text-decoration: none;
+            margin-right: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .language-selector {
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-selector select {
+            background: transparent;
+            border: none;
+            color: #5f6368;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 600px) {
+            .login-card {
+                border: none;
+                padding: 24px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-links {
+                margin-bottom: 16px;
+            }
+        }
+        
+        .error-message {
+            color: #d93025;
+            font-size: 14px;
+            margin-top: 8px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <svg width="40" height="40" viewBox="0 0 40 40">
+                <path fill="#4285F4" d="M32 16v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4z"/>
+                <path fill="#34A853" d="M8 28h8v-4h-8v4z"/>
+                <path fill="#FBBC04" d="M20 16v12h4V16h-4z"/>
+                <path fill="#EA4335" d="M8 16v12h4V16h-4z"/>
+                <path fill="#4285F4" d="M16 12v4h-8v-4h8z"/>
+            </svg>
+            <span>Accounts</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">Help</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>Sign in</h1>
+                <p>Use your Google Account</p>
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email or phone" autocomplete="username" required>
+                    <div class="error-message" id="emailError">Couldn't find your Google Account</div>
+                </div>
+                
+                <a href="#" class="forgot-email">Forgot email?</a>
+                
+                <div class="login-info">
+                    Not your computer? Use Guest mode to sign in privately. <a href="#">Learn more</a>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="#" class="create-account">Create account</a>
+                    <button type="submit" class="next-btn">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">About Google</a>
+                <a href="#">Google Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Help</a>
+            </div>
+            <div class="language-selector">
+                <select>
+                    <option>English (United States)</option>
+                    <option>Español</option>
+                    <option>Français</option>
+                    <option>Deutsch</option>
+                </select>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const emailError = document.getElementById('emailError');
+            
+            // Simple validation - in a real app, this would check against a backend
+            if (!email || !email.includes('@')) {
+                emailError.style.display = 'block';
+            } else {
+                emailError.style.display = 'none';
+                // In a real application, you would submit the form here
+                alert('Login functionality would be implemented here. Entered email: ' + email);
+            }
+        });
+        
+        // Clear error when user starts typing
+        document.getElementById('email').addEventListener('input', function() {
+            document.getElementById('emailError').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
